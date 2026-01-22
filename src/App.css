@@ -1,21 +1,24 @@
 /* Mobile optimizations */
 @media (max-width: 640px) {
+
   /* Prevent horizontal scroll */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
   }
-  
+
   /* Smooth scrolling for mobile */
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Touch-friendly buttons */
-  button, a {
+  button,
+  a {
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   /* Better text readability on mobile */
   .font-mono {
     line-height: 1.6;
@@ -31,6 +34,7 @@
 
 /* Tablet optimizations */
 @media (min-width: 641px) and (max-width: 1024px) {
+
   /* Adjust grid layouts for tablets */
   .grid-cols-2 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -44,4 +48,279 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* --- Robotic & Cyberpunk Animations --- */
+
+/* Glitch Effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch-hover:hover {
+  animation: glitch 0.3s infinite;
+  text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9;
+}
+
+/* Scanline Effect */
+.scanline {
+  width: 100%;
+  height: 5px;
+  background: rgba(34, 197, 94, 0.2);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  position: absolute;
+  top: -10px;
+  left: 0;
+  z-index: 100;
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% {
+    top: -10px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+/* Cyberpunk Card Glow */
+.cyber-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cyber-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(6, 182, 212, 0.2),
+      transparent);
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.cyber-card:hover::after {
+  left: 100%;
+}
+
+.cyber-card:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+/* Neon Text Glow */
+.neon-text-cyan {
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.8), 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+.neon-text-green {
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.8), 0 0 20px rgba(34, 197, 94, 0.4);
+}
+
+/* Flicker Animation */
+@keyframes flicker {
+
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
+    opacity: 0.4;
+  }
+}
+
+.flicker {
+  animation: flicker 3s infinite;
+}
+
+/* Digital Rain Style Borders */
+.digital-border {
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  box-shadow: inset 0 0 10px rgba(6, 182, 212, 0.1);
+}
+
+.digital-border:hover {
+  border-color: rgba(6, 182, 212, 0.8);
+  box-shadow: inset 0 0 15px rgba(6, 182, 212, 0.2), 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+/* Robotic HUD Elements */
+.hud-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neon-cyan);
+  opacity: 0.5;
+}
+
+.hud-corner-tl {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-corner-tr {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.hud-corner-bl {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.hud-corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Rotating Tech Circles */
+@keyframes rotate-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-counter-clockwise {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.tech-circle {
+  border: 1px dashed var(--neon-cyan);
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.tech-circle-1 {
+  width: 300px;
+  height: 300px;
+  animation: rotate-clockwise 20s linear infinite;
+}
+
+.tech-circle-2 {
+  width: 250px;
+  height: 250px;
+  animation: rotate-counter-clockwise 15s linear infinite;
+  border-color: var(--neon-green);
+}
+
+/* Code Rain Style */
+.code-rain {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--neon-cyan);
+  opacity: 0.15;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Futuristic Form Inputs */
+.cyber-input {
+  background: rgba(6, 182, 212, 0.05);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.cyber-input:focus {
+  border-color: var(--neon-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+.cyber-label {
+  display: block;
+  font-family: var(--font-robotic);
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.form-container {
+  position: relative;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.form-container::before {
+  content: "ENTRY_FORM_v2.0";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: black;
+  padding: 0 10px;
+  font-size: 10px;
+  color: var(--neon-cyan);
+  font-family: var(--font-mono);
 }
