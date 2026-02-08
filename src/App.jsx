@@ -240,7 +240,46 @@ const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [typedText, setTypedText] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
   const fullText = "Full Stack Developer";
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   // Smooth scroll function
   const scrollToSection = (sectionId) => {
@@ -258,7 +297,7 @@ const Portfolio = () => {
   // Update active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       sections.forEach(section => {
@@ -328,32 +367,137 @@ const Portfolio = () => {
 
   const projects = [
     {
-      title: 'NGO Pandey Foundation',
-      description: 'Responsive NGO website with donation and contact dashboard',
-      tech: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
-      link: 'https://lively-truffle-e3ed0cpandeyfoundation.netlify.app',
+      title: 'Prime Residency Admin Panel',
+      description: 'Complete admin dashboard for property management system',
+      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
+      link: 'https://prime-residency-admin-panel.vercel.app/login',
       gradient: 'from-purple-500 to-pink-500'
     },
     {
-      title: 'Spotify Clone',
-      description: 'Music player interface replicating Spotify UI',
-      tech: ['HTML', 'CSS', 'JavaScript'],
-      link: 'https://spotify-jun-447.netlify.app',
+      title: 'Prime Residency Website',
+      description: 'Modern real estate website with property listings',
+      tech: ['React', 'CSS', 'JavaScript', 'API'],
+      link: 'https://prime-residency-website.vercel.app/',
+      gradient: 'from-blue-500 to-purple-500'
+    },
+    {
+      title: 'Triveni Inframech',
+      description: 'Corporate infrastructure company website',
+      tech: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+      link: 'https://triveniinframech.com',
       gradient: 'from-green-500 to-emerald-500'
     },
     {
-      title: 'AI Assistant (Jarvis)',
-      description: 'Voice-based AI assistant capable of executing commands',
-      tech: ['HTML', 'CSS', 'JavaScript'],
-      link: 'https://jarvis-ai-assistance-447.netlify.app',
+      title: 'The UV Salon',
+      description: 'Professional salon booking and services website',
+      tech: ['React', 'CSS', 'JavaScript'],
+      link: 'https://theuvsalon.com',
+      gradient: 'from-pink-500 to-rose-500'
+    },
+    {
+      title: 'Theta Byte',
+      description: 'Technology solutions and services platform',
+      tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+      link: 'https://thetabyte.onrender.com/',
+      gradient: 'from-cyan-500 to-blue-500'
+    },
+    {
+      title: 'ERP School Library',
+      description: 'Complete library management system for schools',
+      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
+      link: 'https://erp-library-managment.onrender.com',
+      gradient: 'from-indigo-500 to-purple-500'
+    },
+    {
+      title: 'ERP Fee Management',
+      description: 'Student fee collection and management system',
+      tech: ['React', 'Node.js', 'MongoDB'],
+      link: 'https://erp-fee-panel-frontend.onrender.com',
+      gradient: 'from-orange-500 to-red-500'
+    },
+    {
+      title: 'ERP Branch Admin Panel',
+      description: 'Branch administration dashboard for educational institutes',
+      tech: ['React', 'Express', 'MongoDB'],
+      link: 'https://erp-branchadmin-panel-frontend-rn0g.onrender.com',
+      gradient: 'from-teal-500 to-green-500'
+    },
+    {
+      title: 'ERP Teachers Panel',
+      description: 'Teacher management and academic tracking system',
+      tech: ['React', 'Node.js', 'MongoDB'],
+      link: 'https://erp-teachers-panel-frontend.onrender.com',
+      gradient: 'from-violet-500 to-purple-500'
+    },
+    {
+      title: 'ERP School Panel',
+      description: 'Comprehensive school management system',
+      tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+      link: 'https://erp-school-panel.onrender.com',
+      gradient: 'from-emerald-500 to-teal-500'
+    },
+    {
+      title: 'ERP Super Admin Panel',
+      description: 'Master control panel for entire ERP system',
+      tech: ['React', 'Node.js', 'MongoDB'],
+      link: 'https://erp-superadmin-panel-frontend-0tth.onrender.com',
+      gradient: 'from-red-500 to-pink-500'
+    },
+    {
+      title: 'ERP Warden Panel',
+      description: 'Hostel and accommodation management system',
+      tech: ['React', 'Express', 'MongoDB'],
+      link: 'https://erp-warden-panel-frontend.onrender.com',
       gradient: 'from-blue-500 to-cyan-500'
     },
     {
-      title: 'Age Calculator & Digital Clock',
-      description: 'Interactive JS-based applications for real-time use',
-      tech: ['HTML', 'CSS', 'JavaScript'],
-      link: 'https://calculat-you-rage.netlify.app',
-      gradient: 'from-orange-500 to-red-500'
+      title: 'ERP Parent-Student Panel',
+      description: 'Parent and student portal for academic tracking',
+      tech: ['React', 'Node.js', 'MongoDB'],
+      link: 'https://erp-parent-stu-panel.onrender.com',
+      gradient: 'from-yellow-500 to-orange-500'
+    },
+    {
+      title: 'ERP Staff Panel',
+      description: 'Staff management and HR system',
+      tech: ['React', 'Express', 'MongoDB'],
+      link: 'https://erp-staffs-panel-frontend.onrender.com',
+      gradient: 'from-purple-500 to-indigo-500'
+    },
+    {
+      title: 'ERP Transport Panel',
+      description: 'School transport and route management system',
+      tech: ['React', 'Node.js', 'MongoDB'],
+      link: 'https://erp-transports-panel-frontend.onrender.com',
+      gradient: 'from-green-500 to-blue-500'
+    },
+    {
+      title: 'My Portfolio',
+      description: 'Personal portfolio website showcasing projects',
+      tech: ['React', 'CSS', 'JavaScript'],
+      link: 'https://my-portfolio-xdhl.onrender.com',
+      gradient: 'from-cyan-500 to-purple-500'
+    },
+    {
+      title: 'Fee Management System',
+      description: 'Advanced fee collection and tracking platform',
+      tech: ['React', 'Node.js', 'Express'],
+      link: 'https://feemanagement-frontend.vercel.app/',
+      gradient: 'from-indigo-500 to-blue-500'
+    },
+    {
+      title: 'Omkrit Platform',
+      description: 'Digital platform for business solutions',
+      tech: ['React', 'Node.js', 'MongoDB'],
+      link: 'https://omkrit.onrender.com/',
+      gradient: 'from-rose-500 to-pink-500'
+    },
+    {
+      title: 'Delhi Tour Cab',
+      description: 'Cab booking and tour management system',
+      tech: ['React', 'Express', 'MongoDB'],
+      link: 'https://delhi-tour-cab-frontends.onrender.com',
+      gradient: 'from-amber-500 to-orange-500'
     }
   ];
 
@@ -748,43 +892,122 @@ const Portfolio = () => {
       >
         <div className="max-w-6xl mx-auto">
           <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent font-robotic glitch-hover"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 sm:mb-12 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent font-robotic glitch-hover"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            &lt;EXPERIENCE_LOGS/&gt;
+            💼 &lt;JOB_PROFILE/&gt;
           </motion.h2>
 
-          <div className="space-y-6 sm:space-y-8">
-            {experience.map((exp, index) => (
-              <motion.div
-                key={index}
-                className="bg-black/40 backdrop-blur-md rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-400 transition-all cyber-card digital-border relative overflow-hidden"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="text-2xl sm:text-3xl text-cyan-400 bg-cyan-500/10 p-3 rounded-lg border border-cyan-500/30">
-                      {exp.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-bold font-robotic text-white">{exp.title}</h3>
-                      <p className="text-cyan-400 font-mono text-sm sm:text-base">{exp.company}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="bg-green-500/20 text-green-400 px-4 py-1 rounded-full text-xs sm:text-sm font-mono border border-green-500/30 flicker">
-                      {exp.status}
-                    </span>
-                  </div>
+          {/* Main Job Profile */}
+          <motion.div
+            className="bg-black/50 backdrop-blur-lg rounded-xl p-6 sm:p-8 border border-cyan-500/30 hover:border-cyan-500 mb-8 cyber-card digital-border"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex flex-col sm:flex-row items-start gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-green-500 rounded-lg flex items-center justify-center text-2xl">
+                  <FaBriefcase />
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-2xl sm:text-3xl font-bold text-cyan-400 font-robotic mb-2">MERN Stack Developer</h3>
+                <p className="text-lg text-green-400 font-mono mb-2">DigiCoders Technologies Pvt. Ltd., Lucknow</p>
+                <p className="text-cyan-300 font-mono mb-4">📅 Experience: 1 Year</p>
+                <p className="text-gray-300 leading-relaxed font-mono text-sm sm:text-base">
+                  &gt; Results-driven MERN Stack Developer with 1 year of hands-on experience in designing, developing, and deploying scalable web applications. 
+                  At DigiCoders Technologies, I actively contributed to building full-stack solutions using MongoDB, Express.js, React.js, and Node.js, 
+                  focusing on performance, security, and clean code architecture.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Key Responsibilities */}
+          <motion.div
+            className="bg-black/40 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-cyan-500/20 mb-8 cyber-card"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-xl sm:text-2xl font-bold text-cyan-400 font-robotic mb-6">🛠️ &lt;KEY_RESPONSIBILITIES/&gt;</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                'Developed and maintained full-stack web applications using MERN stack',
+                'Designed RESTful APIs using Node.js & Express.js',
+                'Integrated MongoDB for efficient data storage and management',
+                'Built responsive UI components using React.js & Tailwind CSS',
+                'Implemented authentication & authorization using JWT',
+                'Worked with Git & GitHub for version control and collaboration',
+                'Debugged, optimized, and enhanced application performance',
+                'Collaborated with cross-functional teams to meet project deadlines'
+              ].map((responsibility, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-500/20"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <span className="text-cyan-400 text-sm mt-1">&gt;</span>
+                  <span className="text-gray-300 font-mono text-sm">{responsibility}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Skills & Technologies */}
+          <motion.div
+            className="bg-black/40 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-green-500/20 mb-8 cyber-card"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-xl sm:text-2xl font-bold text-green-400 font-robotic mb-6">🚀 &lt;SKILLS_&_TECHNOLOGIES/&gt;</h4>
+            <div className="space-y-4">
+              {[
+                { category: 'Frontend', skills: 'React.js, HTML5, CSS3, JavaScript (ES6+), Tailwind CSS' },
+                { category: 'Backend', skills: 'Node.js, Express.js' },
+                { category: 'Database', skills: 'MongoDB' },
+                { category: 'Tools', skills: 'Git, GitHub, Postman, VS Code' },
+                { category: 'Others', skills: 'REST APIs, JWT Auth, MVC Architecture' }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-4 rounded-lg bg-green-500/5 border border-green-500/20"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <span className="text-green-400 font-mono font-bold text-sm sm:text-base min-w-[100px]">{item.category}:</span>
+                  <span className="text-gray-300 font-mono text-sm sm:text-base">{item.skills}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Career Objective */}
+          <motion.div
+            className="bg-black/40 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-purple-500/20 cyber-card"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-xl sm:text-2xl font-bold text-purple-400 font-robotic mb-4">🎯 &lt;CAREER_OBJECTIVE/&gt;</h4>
+            <p className="text-gray-300 font-mono text-sm sm:text-base leading-relaxed">
+              &gt; To grow as a skilled Full-Stack Developer by contributing to impactful projects, 
+              improving system performance, and continuously learning modern web technologies.
+            </p>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -851,25 +1074,74 @@ const Portfolio = () => {
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <form className="form-container space-y-6">
+              <form onSubmit={handleSubmit} className="form-container space-y-6">
                 <div>
                   <label className="cyber-label">USER_IDENTIFICATION</label>
-                  <input type="text" className="cyber-input" placeholder="Enter your name..." />
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="cyber-input" 
+                    placeholder="Enter your name..."
+                    required 
+                  />
                 </div>
                 <div>
                   <label className="cyber-label">COMMUNICATION_RELAY</label>
-                  <input type="email" className="cyber-input" placeholder="your@email.com" />
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="cyber-input" 
+                    placeholder="your@email.com"
+                    required 
+                  />
                 </div>
                 <div>
                   <label className="cyber-label">DATA_PACKET</label>
-                  <textarea rows="4" className="cyber-input" placeholder="Upload your message here..."></textarea>
+                  <textarea 
+                    rows="4" 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    className="cyber-input" 
+                    placeholder="Upload your message here..."
+                    required
+                  ></textarea>
                 </div>
+                
+                {/* Status Messages */}
+                {submitStatus === 'success' && (
+                  <div className="text-green-400 font-mono text-sm p-3 bg-green-500/10 border border-green-500/30 rounded">
+                    &gt; MESSAGE_TRANSMITTED_SUCCESSFULLY
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="text-red-400 font-mono text-sm p-3 bg-red-500/10 border border-red-500/30 rounded">
+                    &gt; TRANSMISSION_FAILED - RETRY_REQUIRED
+                  </div>
+                )}
+                
                 <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
                   whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(6, 182, 212, 0.4)" }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-cyan-600 to-cyan-500 text-white font-robotic py-4 rounded pointer-events-auto cursor-pointer flex items-center justify-center gap-2 group"
+                  className={`w-full bg-gradient-to-r from-cyan-600 to-cyan-500 text-white font-robotic py-4 rounded pointer-events-auto cursor-pointer flex items-center justify-center gap-2 group ${
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                 >
-                  EXECUTE_SEND <span className="group-hover:translate-x-2 transition-transform">&gt;&gt;</span>
+                  {isSubmitting ? (
+                    <>
+                      TRANSMITTING... <span className="animate-spin">&gt;</span>
+                    </>
+                  ) : (
+                    <>
+                      EXECUTE_SEND <span className="group-hover:translate-x-2 transition-transform">&gt;&gt;</span>
+                    </>
+                  )}
                 </motion.button>
               </form>
             </motion.div>
