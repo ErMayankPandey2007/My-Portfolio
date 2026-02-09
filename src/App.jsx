@@ -367,6 +367,13 @@ const Portfolio = () => {
 
   const projects = [
     {
+      title: 'Gol Gol Gappe Admin Panel',
+      description: 'Restaurant admin dashboard for order and menu management',
+      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
+      link: 'https://gol-gol-gappe-admin-panel.vercel.app/dashboard',
+      gradient: 'from-yellow-500 to-orange-500'
+    },
+    {
       title: 'Prime Residency Admin Panel',
       description: 'Complete admin dashboard for property management system',
       tech: ['React', 'Node.js', 'MongoDB', 'Express'],
